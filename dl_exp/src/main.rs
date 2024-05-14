@@ -1,3 +1,8 @@
-fn main() {
-    println!("Hello, world!");
+mod text_classification;
+use anyhow::Ok;
+
+fn main() -> anyhow::Result<()> {
+    text_classification::inference_linear();
+
+    Ok(())
 }
