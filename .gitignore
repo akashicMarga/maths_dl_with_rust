@@ -5,6 +5,7 @@ loss.html
 .hf_token
 *target
 __pycache__
+*.csv
 *.o
 *.a
 *.so

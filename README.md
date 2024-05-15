@@ -42,6 +42,17 @@ To get started with this project, you will need to have Rust installed on your m
    cargo run --release --features metal -- algorithm_name
    ```
 
+## Datasets used for experiments
+- For pca,kmeans [credit-card-data-intermediate-dataset](https://www.kaggle.com/datasets/samira1992/credit-card-data-intermediate-dataset)
+
+
+## Learning Resources
+- [Rust by Example](https://doc.rust-lang.org/book/)
+- [The Rust Programming Language](https://doc.rust-lang.org/stable/book/)
+- [Immersive Maths](https://immersivemath.com/ila/ch01_introduction/ch01.html)
+- [deeplearning book](https://www.deeplearningbook.org/)
+- [Huggingface Candle](https://github.com/huggingface/candle)
+- [nalgebra](https://nalgebra.org/)
 
 
 ## License
