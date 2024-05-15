@@ -65,3 +65,11 @@ pub fn calc_euclidean_dist(x1: &Tensor, x2: &Tensor) -> Result<Tensor> {
         .sqrt()?
         .transpose(D::Minus1, D::Minus2)?)
 }
+
+pub fn calc_squared_euclidean_dist(x1: &Tensor, x2: &Tensor) -> Result<Tensor> {
+    let x1 = x1.unsqueeze(0)?;
+    let x2 = x2.unsqueeze(1)?;
+    let diff = x1.broadcast_sub(&x2)?;
+    let squared_dist = diff.sqr()?.sum(D::Minus1)?;
+    Ok(squared_dist.transpose(D::Minus1, D::Minus2)?)
+}
