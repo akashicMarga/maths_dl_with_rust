@@ -1,0 +1,44 @@
+[package]
+name = "hnsw"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+serde1 = ["smallvec/serde", "serde"]
+
+
+[dependencies]
+space = { version = "0.18.0" }
+rand_core = "0.6.3"
+hashbrown = "0.14.5"
+serde = { version = "1.0.126", features = ["derive"], optional = true }
+libm = "0.2.1"
+smallvec = { version = "1.6.1", features = ["const_generics"] }
+ahash = { version = "0.8.11", default-features = false }
+rand_pcg = { version = "0.3.1", features = ["serde1"] }
+hamming-heap = "0.4.1"
+rand = "0.8.4"
+criterion = "0.5.1"
+gnuplot = "0.0.43"
+structopt = "0.3.22"
+easybench = "1.1.0"
+itertools = "0.13.0"
+float-ord = "0.3.1"
+byteorder = "1.4.3"
+serde_json = "1.0.64"
+num-traits = "0.2.14"
+bitarray = { version = "0.10.0", default-features = false, features = ["space"] }
+[profile.dev]
+opt-level = 3
+
+[profile.test]
+# The tests take a very long time without optimization.
+opt-level = 3
+
+[profile.release]
+codegen-units = 1
+# This is here so we can generate flamegraphs.
+debug = true
+
+[package.metadata.docs.rs]
+all-features = true
