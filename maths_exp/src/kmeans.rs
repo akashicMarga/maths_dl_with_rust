@@ -5,6 +5,8 @@ use anyhow::Result;
 use candle::{DType, Device, Tensor, D};
 use rand::prelude::*;
 use crate::utils;
+use rayon::prelude::*;
+
 
 
 /// Perform K-means clustering on the given data.
@@ -31,7 +33,7 @@ fn k_means(data: &Tensor, k: usize, max_iter: i32, device: &Device) -> Result<(T
 
     // Initialize centroids with random data points
     let centroid_indices = indices[..k]
-        .iter()
+        .par_iter()
         .copied()
         .map(|x| x as i64)
         .collect::<Vec<_>>();
@@ -83,7 +85,7 @@ pub fn run() -> Result<()> {
     println!("{}", cluster_assignments);
     let cluster_sizes = cluster_assignments.to_vec1::<u32>()?;
     for i in 0..3 {
-        let size = cluster_sizes.iter().filter(|&&x| x == i as u32).count();
+        let size = cluster_sizes.par_iter().filter(|&&x| x == i as u32).count();
         println!("Cluster {} size: {}", i, size);
     }
     let duration = start.elapsed();

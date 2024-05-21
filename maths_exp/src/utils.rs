@@ -1,5 +1,6 @@
 use candle::{ Device, Tensor, D};
 use anyhow::Result;
+use rayon::prelude::*;
 
 
 pub fn load_dataset(file_path: &str, device: &Device) -> Result<Tensor> {
@@ -15,7 +16,7 @@ pub fn load_dataset(file_path: &str, device: &Device) -> Result<Tensor> {
     }
     let feature_cnt = data[0].len();
     let sample_cnt = data.len();
-    let data = data.into_iter().flatten().collect::<Vec<_>>();
+    let data = data.into_par_iter().flatten().collect::<Vec<_>>();
     let data = Tensor::from_slice(data.as_slice(), (sample_cnt, feature_cnt), device)?;
     Ok(data)
 }
